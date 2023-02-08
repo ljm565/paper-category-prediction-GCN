@@ -1,0 +1,18 @@
+{   
+    "base_path": "./",
+    "model_name": "category_pred_undirected",
+    "loss_data_name": "category_pred_undirected",
+
+    "directed": 0,
+    "dynamic": 1,
+    "hidden_dim": 256,
+    "dropout": 0.1,
+
+
+    "epochs": 1000,
+    "lr": 0.01,
+
+
+    "early_stop_criterion": 1000,
+    "visualize_file_name": "dynamic_undirected"
+}
