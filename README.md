@@ -14,7 +14,7 @@ Node classification은 Graph Neural Networks (GNN)을 활용하여 풀 수 있�
 
 
 ## 사용 데이터
-* ### [Cora Dataset](https://relational.fit.cvut.cz/dataset/CORA)
+* [Cora Dataset](https://relational.fit.cvut.cz/dataset/CORA)
 <br><br>
 
 
