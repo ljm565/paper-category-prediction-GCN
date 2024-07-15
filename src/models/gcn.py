@@ -38,12 +38,12 @@ class GraphConv(nn.Module):
 
 
 class GCN(nn.Module):
-    def __init__(self, config, input_dim, class_num):
+    def __init__(self, config):
         super(GCN, self).__init__()
         self.hidden_dim = config.hidden_dim
         self.dropout = config.dropout
-        self.input_dim = input_dim
-        self.class_num = class_num
+        self.input_dim = config.input_dim
+        self.class_num = config.class_num
         
         self.gc1 = self.get_layers(self.input_dim, self.hidden_dim, True, True)
         self.gc2 = self.get_layers(self.hidden_dim, self.class_num, False, False)
