@@ -18,8 +18,8 @@ def get_model(config, device):
 
 def build_dataset(config):
     if config.cora_dataset_train:
-        cite_data_path = os.path.join(config.cora_dataset.path, 'coara.cites')
-        content_data_path = os.path.join(config.cora_dataset.path, 'coara.content')
+        cite_data_path = os.path.join(config.cora_dataset.path, 'cora/cora.cites')
+        content_data_path = os.path.join(config.cora_dataset.path, 'cora/cora.content')
         adj, feature, label = make_gnn_data(cite_data_path, content_data_path, config.dynamic, config.directed)
         train_idx, val_idx, test_idx = split_data(feature.size(0))
         dataset_dict = {
@@ -39,7 +39,6 @@ def build_dataset(config):
     return dataset_dict
 
 
-
-def get_data_loader(config, tokenizer, modes, is_ddp=False):
-    datasets = build_dataset(config, tokenizer, modes)
+def get_datasets(config):
+    datasets = build_dataset(config)
     return datasets

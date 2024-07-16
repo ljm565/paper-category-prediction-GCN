@@ -16,7 +16,6 @@ directed: False
 dynamic: True
 
 # data config
-workers: 0                             # Don't worry to set worker. The number of workers will be set automatically according to the batch size.
 cora_dataset_train: True                 # if True, TU dataset will be loaded automatically.
 cora_dataset:
     path: data/

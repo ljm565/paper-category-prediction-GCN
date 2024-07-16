@@ -63,25 +63,25 @@ Node classification은 Graph Neural Networks (GNN)을 활용하여 풀 수 있�
 ## 결과
 * ### Directed Graph 학습 결과
     * Loss History<br>
-    <img src="images/directed_loss.png" width="80%"><br><br>
+    <img src="docs/figs/directed_loss.png" width="80%"><br><br>
 
     * Accuracy History<br>
-    <img src="images/directed_acc.png" width="80%"><br><br>
+    <img src="docs/figs/directed_acc.png" width="80%"><br><br>
     
 
     * Test set accuracy: 0.8600 (87 epoch)<br>
     (Validation set의 가장 높은 accuracy를 달성했을 때 모델의 test set 결과)<br><br>
 
     * 학습된 Test set Feature Distribution<br>
-    <img src="result/dynamic_directed.png" width="80%"><br><br>
+    <img src="docs/figs/dynamic_directed.png" width="80%"><br><br>
 
 
 * ### Undirected Graph 학습 결과
     * Loss History<br>
-    <img src="images/undirected_loss.png" width="80%"><br><br>
+    <img src="docs/figs/undirected_loss.png" width="80%"><br><br>
 
     * Accuracy History<br>
-    <img src="images/undirected_acc.png" width="80%"><br><br>
+    <img src="docs/figs/undirected_acc.png" width="80%"><br><br>
     
     아래 결과는 validation set의 가장 높은 accuracy를 달성했을 때 모델의 test set 결과입니다.
 
@@ -89,7 +89,7 @@ Node classification은 Graph Neural Networks (GNN)을 활용하여 풀 수 있�
     (Validation set의 가장 높은 accuracy를 달성했을 때 모델의 test set 결과)<br><br>
 
     * 학습된 Test set Feature Distribution<br>
-    <img src="result/dynamic_undirected.png" width="80%"><br><br>
+    <img src="docs/figs/dynamic_undirected.png" width="80%"><br><br>
 
 <br><br>
 

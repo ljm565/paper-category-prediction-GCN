@@ -7,15 +7,10 @@ from utils import LOGGER, TQDM
 
 
 
-def init_progress_bar(dloader, is_rank_zero, loss_names, nb):
-    if is_rank_zero:
-        header = tuple(['Epoch'] + loss_names)
-        LOGGER.info(('\n' + '%15s' * (1 + len(loss_names))) % header)
-        pbar = TQDM(enumerate(dloader), total=nb)
-    else:
-        pbar = enumerate(dloader)
-    return pbar
-
+def init_progress_bar(loss_names):
+    header = tuple(['Epoch'] + loss_names)
+    LOGGER.info(('\n' + '%15s' * (1 + len(loss_names))) % header)
+    
 
 def choose_proper_resume_model(resume_dir, type):
     weights_dir = os.listdir(os.path.join(resume_dir, 'weights'))
