@@ -18,25 +18,16 @@
             "type": "debugpy",
             "request": "launch",
             "program": "${workspaceFolder}/src/run/validation.py",
-            "args": ["-r", "outputs/GCN/cora_directed", "-l", "metric"],
+            "args": ["-r", "outputs/GCN/cora_undirected", "-l", "metric"],
             "console": "integratedTerminal",
             "justMyCode": true
         },
         {
-            "name": "confusion matrix visualization",
+            "name": "t-sne visualization",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/src/run/vis_statistics.py",
-            "args": ["-r", "outputs/bert/google_store_review", "-l", "metric"],
-            "console": "integratedTerminal",
-            "justMyCode": true
-        },
-        {
-            "name": "print several prediction results",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/src/run/sentiment_prediction.py",
-            "args": ["-r", "outputs/bert/google_store_review", "-l", "metric"],
+            "program": "${workspaceFolder}/src/run/vis_tsne.py",
+            "args": ["-r", "outputs/GCN/cora_undirected", "-l", "metric"],
             "console": "integratedTerminal",
             "justMyCode": true
         }

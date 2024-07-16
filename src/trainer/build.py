@@ -1,10 +1,8 @@
 
 import os
 
-import torch
-
 from models import GCN
-from utils import LOGGER, RANK, colorstr
+from utils import LOGGER, colorstr
 from utils.data_utils import make_gnn_data, split_data
 
 PIN_MEMORY = str(os.getenv('PIN_MEMORY', True)).lower() == 'true'  # global pin_memory for dataloaders

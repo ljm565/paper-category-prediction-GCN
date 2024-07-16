@@ -1,17 +1,15 @@
 import gc
 import time
-import math
-import random
+from sklearn.manifold import TSNE
 
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch import distributed as dist
 from torch.optim.lr_scheduler import OneCycleLR
 
 from tools import TrainingLogger
 from trainer.build import get_model, get_datasets
-from utils import RANK, LOGGER, SCHEDULER_MSG, SCHEDULER_TYPE, colorstr, init_seeds
+from utils import RANK, LOGGER, colorstr, init_seeds
 from utils.func_utils import *
 from utils.filesys_utils import *
 from utils.training_utils import *
@@ -167,7 +165,7 @@ class Trainer:
             is_training_now=True
         ):
         def _init_log_data_for_vis():
-            data4vis = {'trg': [], 'pred': []}
+            data4vis = {'feature': [], 'pred': [], 'label': []}
             return data4vis
 
         def _append_data_for_vis(**kwargs):
@@ -190,8 +188,10 @@ class Trainer:
             adj, feature, label = self.datasets['adj'].to(self.device), self.datasets['feature'].to(self.device), self.datasets['label'].to(self.device)
             output = self.model(adj, feature)
             loss = self.criterion(output[idx], label[idx])
-
-            val_acc = torch.sum(torch.argmax(output[idx], dim=-1).detach().cpu() == label[idx].detach().cpu()) / len(idx)
+            
+            pred = torch.argmax(output[idx], dim=-1).detach().cpu()
+            gt = label[idx].detach().cpu()
+            val_acc = torch.sum(pred == gt) / len(idx)
 
             self.training_logger.update(
                 phase, 
@@ -208,13 +208,42 @@ class Trainer:
             LOGGER.info(('%15s' * 1 + '%15.4g' * len(loss_log)) % msg)
             self.training_logger.update_phase_end(phase, printing=True)
 
-            # if not is_training_now:
-            #     _append_data_for_vis(
-            #         **{'trg': targets4metrics,
-            #             'pred': predictions}
-            #     )
+            if not is_training_now:
+                _append_data_for_vis(
+                    **{'feature': output[idx].detach().cpu().numpy(),
+                       'pred': pred.numpy(),
+                       'label': gt.numpy()}
+                )
 
             # upadate logs and save model
             if is_training_now:
                 self.training_logger.save_model(self.wdir, self.model)
                 self.training_logger.save_logs(self.save_dir)
+
+    
+    def tsne_visualization(self, phase):
+        self.epoch_validate(phase, 0, False)
+            
+        # feature visualization
+        vis_save_dir = os.path.join(self.config.save_dir, 'vis_outputs') 
+        os.makedirs(vis_save_dir, exist_ok=True)
+
+        pred = self.data4vis['pred'][0]
+        label = self.data4vis['label'][0]
+        output = self.data4vis['feature'][0]
+        
+        tsne = TSNE()
+        x_test_2D = tsne.fit_transform(output)
+        x_test_2D = (x_test_2D - x_test_2D.min())/(x_test_2D.max() - x_test_2D.min())
+
+        fig, ax = plt.subplots(1, 2, figsize=(10, 5))
+        plt.setp(ax, xticks=[], yticks=[])
+        
+        ax[0].scatter(x_test_2D[:, 0], x_test_2D[:, 1], s=10, cmap='tab10', c=label)
+        ax[0].set_title("GT visualization")
+
+        ax[1].scatter(x_test_2D[:, 0], x_test_2D[:, 1], s=10, cmap='tab10', c=pred)
+        ax[1].set_title("Pred visualization")
+
+        fig.tight_layout()
+        plt.savefig(os.path.join(vis_save_dir, 'tsne_vis.png'))
