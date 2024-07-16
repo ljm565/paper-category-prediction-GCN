@@ -1,32 +1,8 @@
 import os
-import pickle
 from pathlib import Path
 
 from utils import LOGGER, colorstr
 
-
-
-def read_dataset(path):
-    with open(path, 'rb') as f:
-        data = pickle.load(f)
-    return data
-
-
-def write_dataset(path, obj):
-    with open(path, 'wb') as f:
-        pickle.dump(obj, f)
-
-
-def txt_read(path):
-    with open(path, 'r') as f:
-        lines = f.readlines()
-    lines = [l.strip() for l in lines]
-    return lines
-
-
-def txt_write(path, data):
-    with open(path, 'w') as f:
-        f.writelines(data)
         
 
 def make_project_dir(config, is_rank_zero=False):
