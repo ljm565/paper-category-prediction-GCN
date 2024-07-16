@@ -7,12 +7,14 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from torch import distributed as dist
+from torch.optim.lr_scheduler import OneCycleLR
 
 from tools import TrainingLogger
 from trainer.build import get_model, get_data_loader
 from utils import RANK, LOGGER, SCHEDULER_MSG, SCHEDULER_TYPE, colorstr, init_seeds
 from utils.func_utils import *
 from utils.filesys_utils import *
+from utils.training_utils import *
 
 
 
@@ -60,23 +62,15 @@ class Trainer:
         
         # init criterion, optimizer, etc.
         self.epochs = self.config.epochs
-        # self.steps = self.config.steps
-        # self.lr0 = self.config.lr0
-        # self.lrf = self.config.lrf
-        # self.epochs = math.ceil(self.steps / len(self.dataloaders['train'])) if self.is_training_mode else 1
         self.criterion = nn.CrossEntropyLoss()
         if self.is_training_mode:
             self.optimizer = optim.Adam(self.model.parameters(), lr=self.config.lr)
 
-            # # init scheduler
-            # self.warmup_steps_n = max(0, self.config.warmup_steps)
-            # if self.scheduler_type == 'cosine':
-            #     self.lf = one_cycle(1, self.lrf, self.steps)
-            # elif self.scheduler_type == 'linear':
-            #     self.lf = lambda x: (1 - (x - self.warmup_steps_n) / (self.steps - self.warmup_steps_n)) * (1.0 - self.lrf) + self.lrf
-            # self.scheduler = optim.lr_scheduler.LambdaLR(self.optimizer, lr_lambda=self.lf)
-            # if self.is_rank_zero:
-            #     draw_training_lr_curve(self.config, self.lf, self.steps, self.warmup_steps_n, self.is_ddp, self.world_size)
+            # init scheduler
+            total_steps = self.epochs
+            pct_start = 5 / total_steps
+            final_div_factor = self.lr / 25 / 1e-6
+            self.scheduler = OneCycleLR(self.optimizer, max_lr=self.lr, total_steps=total_steps, pct_start=pct_start, final_div_factor=final_div_factor)
     
 
     def _init_model(self, config, tokenizer, mode):
@@ -181,10 +175,6 @@ class Trainer:
             pbar = init_progress_bar(train_loader, self.is_rank_zero, logging_header, nb)
 
         for i, (src, trg) in pbar:
-            # Warmup
-            self.train_cur_step += 1
-            if self.train_cur_step <= self.warmup_steps_n:
-                self.optimizer.param_groups[0]['lr'] = lr_warmup(self.train_cur_step, self.warmup_steps_n, self.lr0, self.lf)
             cur_lr = self.optimizer.param_groups[0]['lr']
             
             self.train_cur_step += 1
