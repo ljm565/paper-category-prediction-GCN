@@ -75,25 +75,25 @@ GCN 모델을 학습하기 위해서 다음 과정을 따라주시기 바랍니�
 ## Training Results
 ### Directed Graph Trained Results
 * Loss History<br>
-<img src="docs/figs/directed_loss.png" width="80%"><br><br>
+<img src="figs/directed_loss.png" width="80%"><br><br>
 
 * Accuracy History<br>
-<img src="docs/figs/directed_acc.png" width="80%"><br><br>
+<img src="figs/directed_acc.png" width="80%"><br><br>
 
 
 * Test set accuracy: 0.8600 (87 epoch)<br>
 (Validation set의 가장 높은 accuracy를 달성했을 때 모델의 test set 결과)<br><br>
 
 * Test set Feature Distribution<br>
-<img src="docs/figs/dynamic_directed.png" width="80%"><br><br>
+<img src="figs/dynamic_directed.png" width="80%"><br><br>
 
 
 ### Undirected Graph 학습 결과
 * Loss History<br>
-<img src="docs/figs/undirected_loss.png" width="80%"><br><br>
+<img src="figs/undirected_loss.png" width="80%"><br><br>
 
 * Accuracy History<br>
-<img src="docs/figs/undirected_acc.png" width="80%"><br><br>
+<img src="figs/undirected_acc.png" width="80%"><br><br>
 
 아래 결과는 validation set의 가장 높은 accuracy를 달성했을 때 모델의 test set 결과입니다.
 
@@ -101,7 +101,7 @@ GCN 모델을 학습하기 위해서 다음 과정을 따라주시기 바랍니�
 (Validation set의 가장 높은 accuracy를 달성했을 때 모델의 test set 결과)<br><br>
 
 * Test set Feature Distribution<br>
-<img src="docs/figs/dynamic_undirected.png" width="80%"><br><br>
+<img src="figs/dynamic_undirected.png" width="80%"><br><br>
 
 <br><br>
 
