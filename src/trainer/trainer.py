@@ -1,5 +1,6 @@
 import gc
 import time
+import matplotlib.pyplot as plt
 from sklearn.manifold import TSNE
 
 import torch
@@ -10,7 +11,6 @@ from torch.optim.lr_scheduler import OneCycleLR
 from tools import TrainingLogger
 from trainer.build import get_model, get_datasets
 from utils import RANK, LOGGER, colorstr, init_seeds
-from utils.func_utils import *
 from utils.filesys_utils import *
 from utils.training_utils import *
 
