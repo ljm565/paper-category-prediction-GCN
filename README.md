@@ -17,8 +17,8 @@ For a detailed explanation of the code, please refer to [Cora 데이터와 GCN�
 ## Base Dataset
 * [Cora Dataset](https://relational.fit.cvut.cz/dataset/CORA).
 * Custom datasets can also be used by setting the path in the `config/config.yaml`.
-However, implementing a custom dataloader may require additional coding work in `src/utils/data_utils.py`.
-<br><br>
+However, implementing a custom dataloader may require additional coding work in `src/trainer/build.py`.
+<br><br><br>
 
 ## Supported Devices
 * CPU, GPU (DDP is not supported), MPS (for Mac and torch>=1.12.0)
@@ -56,7 +56,7 @@ This repository is structured as follows.
     |
     └── uitls                   
         ├── __init__.py             <- File for initializing the logger, versioning, etc.
-        ├── data_utils.py           <- File defining the custom dataset dataloader
+        ├── data_utils.py           <- File for pre-preprocessing graph data
         ├── filesys_utils.py       
         └── training_utils.py     
 ```
@@ -67,7 +67,7 @@ Please follow the steps below to train the GCN.
 
 1. [Getting Started](./docs/1_getting_started.md)
 2. [Data Preparation](./docs/2_data_preparation.md)
-3. [Training](./docs/3_trainig.md)
+3. [Training](./docs/3_training.md)
 4. ETC
    * [Evaluation](./docs/4_model_evaluation.md)
    * [Predicted Feature Visualization using t-SNE](./docs/5_tsne_vis.md)
