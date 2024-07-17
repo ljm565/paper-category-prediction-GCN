@@ -12,8 +12,8 @@ name: cora
 # model config
 hidden_dim: 256
 dropout: 0.1
-directed: False
-dynamic: True
+directed: False                          # if True, directed graph will be constructed.
+dynamic: True                            # if True, [D^-0.5 x A x D^-0.5] will be used to normalize graph or [D^-1 x A] will be used.
 
 # data config
 cora_dataset_train: True                 # if True, TU dataset will be loaded automatically.
