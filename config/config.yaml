@@ -3,7 +3,7 @@ seed: 0
 deterministic: True
 
 # environment config
-device: cpu     # examples: [0], [0,1], [1,2,3], cpu, mps...  
+device: cpu     # examples: [0], cpu, mps, not supported DDP 
 
 # project config
 project: outputs/GCN

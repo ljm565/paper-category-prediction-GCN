@@ -63,14 +63,14 @@ This repository is structured as follows.
 <br><br>
 
 ## Tutorials & Documentations
-Please follow the steps below to train the VAE.
+Please follow the steps below to train the GCN.
 
 1. [Getting Started](./docs/1_getting_started.md)
 2. [Data Preparation](./docs/2_data_preparation.md)
 3. [Training](./docs/3_trainig.md)
 4. ETC
    * [Evaluation](./docs/4_model_evaluation.md)
-   * [Generated Data Visualization](./docs/5_generated_data_visualization.md)
+   * [Predicted Feature Visualization using t-SNE](./docs/5_tsne_vis.md)
 
 <br><br><br>
 
