@@ -24,7 +24,7 @@ directed: False                          # if True, directed graph will be const
 dynamic: True                            # if True, [D^-0.5 x A x D^-0.5] will be used to normalize graph or [D^-1 x A] will be used.
 
 # data config
-cora_dataset_train: True                 # if True, TU dataset will be loaded automatically.
+cora_dataset_train: True                 # if True, Cora dataset will be loaded automatically.
 cora_dataset:
     path: data/
 CUSTOM:

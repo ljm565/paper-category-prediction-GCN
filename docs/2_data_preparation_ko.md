@@ -5,7 +5,7 @@ Custom 데이터를 이용하기 위해서는 아래 설명을 참고하시기 �
 ### 1. Cora
 Cora 데이터를 학습하고싶다면 아래처럼 `config/config.yaml`의 `cora_dataset_train`을 `True` 설정하면 됩니다.
 ```yaml
-cora_dataset_train: True                 # if True, TU dataset will be loaded automatically.
+cora_dataset_train: True                 # if True, Cora dataset will be loaded automatically.
 cora_dataset:
     path: data/
 CUSTOM:
@@ -19,7 +19,7 @@ CUSTOM:
 만약 custom 데이터를 학습하고 싶다면 아래처럼 `config/config.yaml`의 `cora_dataset_train`을 `False`로 설정하면 됩니다.
 Custom data 사용을 위해 train/validation/test 데이터셋 경로를 입력해주어야 합니다.
 ```yaml
-cora_dataset_train: False                # if True, TU dataset will be loaded automatically.
+cora_dataset_train: False                # if True, Cora dataset will be loaded automatically.
 cora_dataset:
     path: data/
 CUSTOM:
