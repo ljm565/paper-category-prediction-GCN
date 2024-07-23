@@ -37,7 +37,7 @@ epochs: 1000
 lr: 1e-2
 
 # logging config
-common: ['train_loss', 'train_acc', 'validation_loss', 'validation_acc']
+common: ['train_loss', 'train_acc', 'validation_loss', 'validation_acc', 'lr']
 ```
 
 
