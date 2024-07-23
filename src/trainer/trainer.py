@@ -39,7 +39,7 @@ class Trainer:
         # path, data params
         self.resume_path = resume_path
 
-        # init tokenizer, model, dataset, dataloader, etc.
+        # init model, dataset.
         self.modes = ['train', 'validation'] if self.is_training_mode else ['train', 'validation', 'test']
         self.datasets = get_datasets(self.config)
         self.model = self._init_model(self.config, self.mode)
